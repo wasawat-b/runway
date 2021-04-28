@@ -1,0 +1,25 @@
+th{
+    text-align: center;
+    border: 1px solid black;
+    width: 100px;
+}
+
+td{
+    border: 1px solid black;
+}
+
+.cate{
+    width: 15%;
+}
+
+.med{
+    width: 10%;
+}
+
+.detail{
+    width: auto;
+}
+
+.less{
+    width: 8%;
+}

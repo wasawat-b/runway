@@ -1,0 +1,14 @@
+div{
+    align-items: center;
+    margin: 0px;
+}
+
+.editPencil{
+    width: 30px;
+    height: auto;
+}
+
+.deleteIcon{
+    width: 30px;
+    height: auto;
+}

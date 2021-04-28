@@ -1,0 +1,73 @@
+.cover{
+    background-image: url("./image/white-background.jpg");
+    border: 1px solid black;
+    height: 20vh;
+    margin-bottom: 10px;
+}
+
+.image{
+    height: 20vh;
+    box-sizing: border-box;
+    float: left;
+    margin-right: 5vw;
+}   
+
+.text{
+    text-align: left;
+    height: 20vh;
+    box-sizing: border-box;
+    font-size: 5vh;
+    padding: 2.5vh 0 2.5vh 0;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.textSmall{
+    position: absolute;
+    padding-top: 3vh;   
+    text-align: left;
+    font-size: 2vh;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.runway{
+    font-size: larger;
+    color: rgb(250, 0, 0);
+}
+
+.info{
+    position: relative;
+    top: -15vh;
+    left: 80%;
+    width: fit-content;
+    height: 10vh;
+    font-size: 2vh;
+}
+
+@media (max-width : 725px){
+    .cover{
+        height: 15vh;
+    }
+
+    .image{
+        height: 15vh;
+        margin-right: 2vw;
+    }
+
+    .text{
+        height: 15vh;
+        font-size: 3vh;
+        padding-right: 20vw;
+    }
+
+    .textSmall{
+        font-size: 1.5vh;
+        padding-top: 2vh;
+    }
+
+    .info{
+        top: -10vh;
+        left: 65%;
+    }
+}
