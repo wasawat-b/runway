@@ -5,13 +5,13 @@ const Header = () => {
     return(
         <tr>
             <th className={classes.cate}>Categories</th>
-            <th className={classes.med}>Date</th>
-            <th className={classes.less}>Order</th>
-            <th className={classes.med}>Person</th>
+            <th>Date</th>
+            <th>Order</th>
+            <th>Person</th>
             <th className={classes.detail}>Detail</th>
-            <th className={classes.less}>Amount</th>
-            <th className={classes.less}>Check</th>
-            <th className={classes.less}>Edit</th>
+            <th>Amount</th>
+            <th>Check</th>
+            <th className={classes.edit}>Edit</th>
         </tr>
     )
 }

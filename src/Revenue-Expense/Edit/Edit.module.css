@@ -5,10 +5,14 @@ div{
 
 .editPencil{
     width: 30px;
-    height: auto;
+    height: 30px;
 }
 
 .deleteIcon{
     width: 30px;
-    height: auto;
+    height: 30px;
+}
+
+.editPencil:hover, .deleteIcon:hover{
+    width: 40px;
 }

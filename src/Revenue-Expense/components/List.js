@@ -10,15 +10,15 @@ const List = (props) => {
     <Table>
       <Header />
       {props.list.map((list) => (
-        <tr key={list.order}>
-          <td className={classes.category}>{list.category}</td>
-          <td className={classes.date}>{list.date}</td>
-          <td className={classes.lessSpace}>{list.order}</td>
-          <td className={classes.person}>{list.person}</td>
-          <td className={classes.detail}>{list.detail}</td>
-          <td className={classes.lessSpace}>{list.amount}</td>
-          <td className={classes.lessSpace}><input type="checkbox" /></td>
-          <td className={classes.lessSpace}>
+        <tr className={classes.row} key={list.order}>
+          <td>{list.category}</td>
+          <td>{list.date}</td>
+          <td>{list.order}</td>
+          <td>{list.person}</td>
+          <td>{list.detail}</td>
+          <td>{list.amount}</td>
+          <td><input className={classes.trick} type="checkbox" /></td>
+          <td>
             <Edit id={list.order} onEdit={props.onEditItem} onDelete={props.onDeleteItem} />
           </td>
         </tr>

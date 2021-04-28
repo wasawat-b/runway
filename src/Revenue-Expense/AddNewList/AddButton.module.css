@@ -1,12 +1,15 @@
 .addButton{
     position: fixed;
-    right: 5px;
+    right: 5vh;
     bottom: 0vh;
     width: 120px;
-    height: auto;
-    font-size: 17px;
+    height: 18px;
+    padding: 6px;
+    font-size: 18px;
     text-align: center;
     border: 1px solid black;
+    border-radius: 10px;
+    margin: 0 5vh 0 0;
     z-index: 20;
     background-color: chartreuse;
 }

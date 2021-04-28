@@ -8,20 +8,20 @@ import classes from "./Header.module.css";
 const Header = () => {
   return (
     <Modal>
-      <div className={classes.cover}>
+      <div className={classes.pic}>
         <img className={classes.image} src={Logo} alt="" />
         <h1 className={classes.text}>
-          Runway Healthy Drink <br />
+          Runway<br />
           <span className={classes.textSmall}>
             Drink for your health.
             <br />
             เพราะอกไก่ต้อง <span className={classes.runway}>"RUNWAY"</span>
           </span>
         </h1>
-        <div className={classes.info}>
-          <p>Line: @runwaydrink</p>
-          <p>IG: runway_healthy_drink</p>
-        </div>
+        <p className={classes.info}>
+          Line: @runwaydrink <br />
+          IG: runway_healthy_drink
+        </p>
       </div>
     </Modal>
   );
