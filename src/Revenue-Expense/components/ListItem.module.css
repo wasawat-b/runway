@@ -1,0 +1,62 @@
+td{
+    border: 0.5px solid rgb(192, 188, 188);
+    text-align: center;
+    padding: 3px;
+    height: 4vh;
+    font-size: 1.3vw;
+}
+
+input.trick{
+    width: 15px;
+    height: 15px;
+}
+
+.row:hover{
+    background-color: rgb(243, 243, 243);
+}
+
+input.trick:hover{
+    width: 20px;
+    height: 20px;
+}
+
+.editPencil{
+    padding-top: 5px;
+    margin: 0 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.deleteIcon{
+    padding-top: 5px;
+    margin: 0 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.editPencil:hover, .deleteIcon:hover{
+    width: 30px;
+    height: 30px;
+}
+
+::-webkit-scrollbar {
+    height: 1px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+@media (max-width: 768px){
+    .detail{
+        max-width: 250px;
+    }
+}

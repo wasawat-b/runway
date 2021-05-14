@@ -1,51 +1,112 @@
-import React, { useState } from "react";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import useValid from "../hook/use-valid";
+
+import { uiActions } from "../store/ui-slice";
+import { listActions } from "../store/list-slice";
 
 import Modal from "../UI/Modal";
 import Check from "../Image/check.jpg";
-import Delete from "../Image/delete";
-import Edit from "../Image/edit_pencil.png";
+import Edit from "../Image/edit_pencil.jpg";
+import Delete from "../Image/deleteIcon.jpg";
 
 import classes from "./EditForm.module.css";
 
 // Pop-out when click the Edit button at the end of the List.
-const EditForm = (props) => {
+const EditForm = () => {
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
-  const [order, setOrder] = useState("");
   const [person, setPerson] = useState("");
-  const [detail, setDetail] = useState("");
   const [amount, setAmount] = useState("");
 
-  const [stawBig, setStawBig] = useState("0");
-  const [stawSmall, setStawSmall] = useState("0");
-  const [banaBig, setBanaBig] = useState("0");
-  const [banaSmall, setBanaSmall] = useState("0");
-  const [chocBig, setChocBig] = useState("0");
-  const [chocSmall, setChocSmall] = useState("0");
+  const [stawBig, setStawBig] = useState("");
+  const [stawSmall, setStawSmall] = useState("");
+  const [banaBig, setBanaBig] = useState("");
+  const [banaSmall, setBanaSmall] = useState("");
+  const [chocBig, setChocBig] = useState("");
+  const [chocSmall, setChocSmall] = useState("");
 
   const [categorySellShow, setCategorySellShow] = useState(false);
   const [categorySummaryShow, setCategorySummaryShow] = useState(false);
   const [categoryOtherShow, setCategoryOtherShow] = useState(false);
   const [personOtherShow, setPersonOtherShow] = useState(false);
 
-  // Changing Category
+  const orderRef = useRef("");
+  const detailRef = useRef("");
+
+  const {
+    isValid: categoryIsValid,
+    errorOccur: categoryError,
+    inputBlur: categoryBlur,
+    inputFocus: categoryFocus,
+    reset: restCategory,
+  } = useValid(category);
+  const {
+    isValid: dateIsValid,
+    errorOccur: dateError,
+    inputBlur: dateBlur,
+    inputFocus: dateFocus,
+    reset: resetDate,
+  } = useValid(parseInt(date));
+  const {
+    isValid: orderIsValid,
+    errorOccur: orderError,
+    inputBlur: orderBlur,
+    inputFocus: orderFocus,
+    reset: resetOrder,
+  } = useValid(orderRef.current.value);
+  const {
+    isValid: personIsValid,
+    errorOccur: personError,
+    inputBlur: personBlur,
+    inputFocus: personFocus,
+    reset: resetPerson,
+  } = useValid(person);
+  const {
+    isValid: amountIsValid,
+    errorOccur: amountError,
+    inputBlur: amountBlur,
+    inputFocus: amountFocus,
+    reset: resetAmount,
+  } = useValid(amount);
+
+  const dispatch = useDispatch();
+
+  // เช็คว่า order เป็น order ใหม่นะ
+  const allLists = useSelector((state) => state.lists.lists);
+  let orderIsExisted = false;
+  const existingOrder = allLists.find(
+    (state) => state.order === orderRef.current.value
+  );
+  if (existingOrder) {
+    orderIsExisted = true;
+  }
+
+  // Changing Category !!!!
   const categoryChange = (event) => {
     if (event.target.value === "Other...") {
       setCategoryOtherShow(true);
+      setCategorySellShow(false);
+      setCategorySummaryShow(false);
+      setCategory("");
       return;
     }
     if (event.target.value === "ยอดขาย") {
       setCategorySellShow(true);
+      setCategoryOtherShow(false);
       setCategory(event.target.value);
       return;
     }
     setCategory(event.target.value);
     setCategorySellShow(false);
   };
+
   const categoryChangeForOther = (event) => {
-    setCategory(parseInt(event.target.value));
+    setCategory(event.target.value);
   };
 
+  // จำนวนขวดที่ขายได้
   const stawBigChange = (event) => {
     setStawBig(parseInt(event.target.value));
   };
@@ -64,6 +125,7 @@ const EditForm = (props) => {
   const chocSmallChange = (event) => {
     setChocSmall(parseInt(event.target.value));
   };
+  // sum จาก จำนวนขวดที่ขายได้
   const accepted = () => {
     const price =
       (stawBig + banaBig + chocBig) * 75 +
@@ -74,6 +136,7 @@ const EditForm = (props) => {
   };
   const declined = () => {
     setCategorySellShow(false);
+    setCategory("");
   };
   const edited = () => {
     setCategorySellShow(true);
@@ -85,33 +148,43 @@ const EditForm = (props) => {
     setDate(event.target.value);
   };
 
-  // Changing Order
-  const orderChange = (event) => {
-    setOrder(event.target.value);
-  };
-
   // Changing Person
   const personChange = (event) => {
     if (event.target.value === "Other...") {
       setPersonOtherShow(true);
+      setPerson("");
       return;
     }
     setPersonOtherShow(false);
     setPerson(event.target.value);
   };
+
   const personChangeForOther = (event) => {
     setPerson(event.target.value);
-  };
-
-  // Changing Detail
-  const detailChange = (event) => {
-    setDetail(event.target.value);
   };
 
   // Changing Amount
   const amountChange = (event) => {
     setAmount(event.target.value);
+    return;
   };
+
+  // close Edit page
+  const showEditTable = () => {
+    dispatch(uiActions.showingEdit());
+  };
+
+  let formIsValid = false;
+  if (
+    categoryIsValid &&
+    dateIsValid &&
+    orderIsValid &&
+    !orderIsExisted &&
+    personIsValid &&
+    amountIsValid
+  ) {
+    formIsValid = true;
+  }
 
   // Sending all received data to the Body in Container.
   const submitHandler = (event) => {
@@ -123,15 +196,14 @@ const EditForm = (props) => {
       day: "2-digit",
     }).format(new Date(date));
 
-    const enteredTableData = {
+    //gather all data
+    const gatheringList = {
       category: category,
-      order: order,
       date: theDate,
+      order: orderRef.current.value,
       person: person,
-      detail: detail,
+      detail: detailRef.current.value,
       amount: amount,
-    };
-    const enteredSellBottle = {
       stawBig: stawBig,
       stawSmall: stawSmall,
       banaBig: banaBig,
@@ -140,25 +212,36 @@ const EditForm = (props) => {
       chocSmall: chocSmall,
     };
 
-    const tableData = {
-      ...enteredTableData,
-    };
-    const sellBottleData = {
-      ...enteredSellBottle,
-    };
+    //send data
+    dispatch(listActions.editList(gatheringList));
+    dispatch(uiActions.showingEdit());
 
-    props.editData(tableData);
-    props.editSellBottle(sellBottleData);
-    props.onShowEditTable();
+    restCategory();
+    resetDate();
+    resetOrder();
+    resetPerson();
+    resetAmount();
   };
 
+  const categoryClasses = categoryError ? "formControl invalid" : "formControl";
+  const dateClasses = dateError ? "formControl invalid" : "formControl";
+  const orderClasses = orderError ? "formControl invalid" : "formControl";
+  const personClasses = personError ? "formControl invalid" : "formControl";
+  const amountClasses = amountError ? "formControl invalid" : "formControl";
+
   return (
-    <Modal onClose={props.onShow}>
+    <Modal onClose={showEditTable}>
       <form className={classes.form} onSubmit={submitHandler}>
-        <div className={classes.formControl}>
+        <h1>Edit Form</h1>
+        <div className={categoryClasses}>
           <label>Category: </label>
-          <select value={category} onChange={categoryChange}>
-            <option>--Please Select--</option>
+          <select
+            value={category}
+            onChange={categoryChange}
+            onBlur={categoryBlur}
+            onFocus={categoryFocus}
+          >
+            <option value="">--Please Select--</option>
             <option value="งบซื้อไก่">งบซื้อไก่</option>
             <option value="ค่าจ้างทำไก่">ค่าจ้างทำไก่</option>
             <option value="งบซื้ออุปกรณ์สิ่งของ">งบซื้ออุปกรณ์สิ่งของ</option>
@@ -169,13 +252,17 @@ const EditForm = (props) => {
             <option value="จ่ายส่วนแบ่ง">จ่ายส่วนแบ่ง</option>
             <option value="Other...">Other...</option>
           </select>
+          {categoryError && <p>Please enter a category!</p>}
 
           <div className={classes.inputBlock}>
             {categorySellShow === true || categorySummaryShow === true ? (
               <div className={classes.sellList}>
-                สตรอ {stawBig}ขวดใหญ่ {stawSmall}ขวดเล็ก <br />
-                กล้วย {banaBig}ขวดใหญ่ {banaSmall}ขวดเล็ก <br />
-                ช็อค {chocBig}ขวดใหญ่ {chocSmall}ขวดเล็ก
+                สตรอ {stawBig ? stawBig : 0}ขวดใหญ่ {stawSmall ? stawSmall : 0}
+                ขวดเล็ก <br />
+                กล้วย {banaBig ? banaBig : 0}ขวดใหญ่ {banaSmall ? banaSmall : 0}
+                ขวดเล็ก <br />
+                ช็อค {chocBig ? chocBig : 0}ขวดใหญ่ {chocSmall ? chocSmall : 0}
+                ขวดเล็ก
               </div>
             ) : null}
             {categorySellShow === true ? (
@@ -185,6 +272,7 @@ const EditForm = (props) => {
                   <input
                     className={classes.inputSell}
                     type="number"
+                    min="0"
                     value={stawBig}
                     onChange={stawBigChange}
                   />
@@ -192,6 +280,7 @@ const EditForm = (props) => {
                   <input
                     className={classes.inputSell}
                     type="number"
+                    min="0"
                     value={stawSmall}
                     onChange={stawSmallChange}
                   />
@@ -201,6 +290,7 @@ const EditForm = (props) => {
                   <input
                     className={classes.inputSell}
                     type="number"
+                    min="0"
                     value={banaBig}
                     onChange={banaBigChange}
                   />
@@ -208,6 +298,7 @@ const EditForm = (props) => {
                   <input
                     className={classes.inputSell}
                     type="number"
+                    min="0"
                     value={banaSmall}
                     onChange={banaSmallChange}
                   />
@@ -217,6 +308,7 @@ const EditForm = (props) => {
                   <input
                     className={classes.inputSell}
                     type="number"
+                    min="0"
                     value={chocBig}
                     onChange={chocBigChange}
                   />
@@ -224,6 +316,7 @@ const EditForm = (props) => {
                   <input
                     className={classes.inputSell}
                     type="number"
+                    min="0"
                     value={chocSmall}
                     onChange={chocSmallChange}
                   />
@@ -253,28 +346,49 @@ const EditForm = (props) => {
           </div>
 
           {categoryOtherShow === true ? (
+            // input สำหรับ Other...
             <input
               className={classes.inputOther}
               type="text"
               value={category}
               onChange={categoryChangeForOther}
+              placeholder="Other..."
             />
           ) : null}
         </div>
 
-        <div className={classes.formControl}>
+        <div className={dateClasses}>
           <label>Date (m/d/y): </label>
-          <input type="date" value={date} onChange={dateChange} />
+          <input
+            type="date"
+            value={date}
+            onChange={dateChange}
+            onBlur={dateBlur}
+            onFocus={dateFocus}
+          />
         </div>
+        {dateError && <p>Please select a date!</p>}
 
-        <div className={classes.formControl}>
+        <div className={orderClasses}>
           <label>Order: </label>
-          <input type="number" value={order} onChange={orderChange} />
+          <input
+            type="number"
+            ref={orderRef}
+            onBlur={orderBlur}
+            onFocus={orderFocus}
+          />
         </div>
+        {orderError && <p>Please enter a order!</p>}
+        {orderIsExisted && <p>The order number is used!</p>}
 
-        <div className={classes.formControl}>
+        <div className={personClasses}>
           <label>Person: </label>
-          <select value={person} onChange={personChange}>
+          <select
+            value={person}
+            onChange={personChange}
+            onBlur={personBlur}
+            onFocus={personFocus}
+          >
             <option>--Please Select--</option>
             <option value="Runway">Runway</option>
             <option value="Pee">Pee</option>
@@ -282,29 +396,45 @@ const EditForm = (props) => {
             <option value="Other...">Other...</option>
           </select>
           {personOtherShow === true ? (
+            // input สำหรับ Other...
             <input
               className={classes.inputOther}
               type="text"
               value={person}
               onChange={personChangeForOther}
+              onBlur={personBlur}
+              onFocus={personFocus}
+              placeholder="Other..."
             />
           ) : null}
         </div>
+        {personError && <p>Please enter a person!</p>}
 
         <div className={classes.formControl}>
           <label>Detail: </label>
-          <input type="text" value={detail} onChange={detailChange} />
+          <input type="text" ref={detailRef} />
         </div>
 
-        <div className={classes.formControl}>
+        <div className={amountClasses}>
           <label>Amount: </label>
-          <input type="number" value={amount} onChange={amountChange} />
+          <input
+            type="number"
+            value={amount}
+            onChange={amountChange}
+            onBlur={amountBlur}
+            onFocus={amountFocus}
+          />
         </div>
+        {amountError && <p>Please enter a amount!</p>}
 
-        <button className={classes.buttonAdd} type="submit">
+        <button
+          className={classes.buttonAdd}
+          type="submit"
+          disabled={!formIsValid}
+        >
           Add
         </button>
-        <button className={classes.buttonClose} onClick={props.onShowAddTable}>
+        <button className={classes.buttonClose} onClick={showEditTable}>
           Close
         </button>
       </form>

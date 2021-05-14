@@ -1,129 +1,37 @@
-import React, { Component } from "react";
-
+import { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchListData, sendListData } from "../store/list-action";
 import AddButton from "../AddNewList/AddButton";
 import AddNewList from "../AddNewList/AddNewList";
 import List from "../components/List";
 import EditForm from "../Edit/EditForm";
 
-import classes from "./Body.module.css";
+function Body() {
+  const dispatch = useDispatch();
+  const lists = useSelector((state) => state.lists);
+  const showEdit = useSelector((state) => state.ui.showEdit);
+  const showAddTable = useSelector((state) => state.ui.showAddTable);
 
-class Body extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tables: [],
-      changedData: [],
-      findData: {},
-      bottle: [],
-      findDataIndex: null,
-      showAddTable: false,
-      showEditTable: false,
-    };
-  }
+  useEffect(() => {
+    dispatch(fetchListData());
+  }, [dispatch]);
 
-  // AddTable functions
-  tableHandler = (data) => {
-    const table = [...this.state.tables, data];
-    this.setState({ tables: table });
-  };
+  useEffect(() => {
+    if (lists.changed) {
+      dispatch(sendListData(lists));
+    }
+  }, [lists, dispatch]);
 
-  sellBottleHandle = (data) => {
-    const sellBottle = [...this.state.bottle, data];
-    this.setState({ bottle : sellBottle});
-  };
-  
-  changedShowAddTable = () => {
-    const showAddTable = !this.state.showAddTable;
-    this.setState({ showAddTable: showAddTable });
-  };
-
-  // EditTable Functions
-  editedTable = (data) => {
-    const index = this.state.findDataIndex;
-
-    const table = this.state.tables.reduce(
-      (prev, cur) =>
-        cur === this.state.tables[index] ? [...prev, data] : [...prev, cur],
-      []
-    );
-
-    this.setState({ tables: table, showEditTable: false });
-  };
-
-  editSellBottleHandle = (data) => {
-    const index = this.state.findDataIndex;
-
-    const bottle = this.state.bottle.reduce(
-      (prev, cur) =>
-        cur === this.state.bottle[index] ? [...prev, data] : [...prev, cur],
-      []
-    );
-
-    this.setState({ bottle: bottle, showEditTable: false });
-  };
-
-  changedShowEditTable = () => {
-    this.setState({ showEditTable: false });
-  };
-
-  // List Function
-  editItemHandler = (itemOrder) => {
-    let findedData = this.state.tables
-      .filter((table) => table.order === itemOrder)
-      .reduce((value, curVal) => curVal);
-
-    const findedDataIndex = this.state.tables.findIndex(
-      (table) => table.order === itemOrder
-    );
-
-    this.setState({
-      findDadta: findedData,
-      findDataIndex: findedDataIndex,
-      showEditTable: true,
-    });
-  };
-
-  deleteItemHandler = (itemOrder) => {
-    const changedTable = this.state.tables.filter(
-      (table) => table.order !== itemOrder
-    );
-
-    this.setState({ tables: changedTable });
-  };
-
-  render() {
-    return (
-      <div className={classes.div}>
-        {this.state.showEditTable && (
-          <EditForm
-            editData={this.editedTable}
-            editSellBottle={this.editSellBottleHandle}
-            onShowEditTable={this.changedShowEditTable}
-            onShow={this.changedShowEditTable}
-          />
-        )}
-        {this.state.showAddTable ? (
-          <AddNewList
-            tableLength={(this.state.tables.length+1)}
-            addTable={this.tableHandler}
-            addSellBottle={this.sellBottleHandle}
-            onShowAddTable={this.changedShowAddTable}
-            onShow={this.changedShowAddTable}
-          />
-        ) : null}
-        <List
-          list={this.state.tables}
-          onAddImage={this.addImageHandler}
-          onEditItem={this.editItemHandler}
-          onDeleteItem={this.deleteItemHandler}
-        />
-        <div>
-          <AddButton 
-            onShowAddNewListForm={this.changedShowAddTable} />
-        </div>
+  return (
+    <Fragment>
+      {showEdit && <EditForm />}
+      {showAddTable && <AddNewList />}
+      <List />
+      <div>
+        <AddButton />
       </div>
-    );
-  }
+    </Fragment>
+  );
 }
 
 export default Body;
