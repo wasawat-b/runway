@@ -4,6 +4,12 @@
 
 @media (max-width: 480px) {
     .body {
-        margin: 0 0.5rem;
+        margin: 0 0.5em;
+    }
+}
+
+@media (max-width: 223px) {
+    .body {
+        margin: 0;
     }
 }
