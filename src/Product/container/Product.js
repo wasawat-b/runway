@@ -26,7 +26,7 @@ const Product = () => {
             <span>หมายเหตุ: โปรโมชันไม่รวมค่าขนส่งนะครับ</span>
           </p>
           <p>
-            <Link to="/products/bigBottle">เข้าชมสินค้า</Link>
+            <Link className={classes.link} to="/products/bigBottle">เข้าชมสินค้า</Link>
           </p>
         </div>
       </div>
@@ -47,7 +47,7 @@ const Product = () => {
             <span>หมายเหตุ: โปรโมชันไม่รวมค่าขนส่งนะครับ</span>
           </p>
           <p>
-            <Link to="/products/smallBottle">เข้าชมสินค้า</Link>
+            <Link className={classes.link} to="/products/smallBottle">เข้าชมสินค้า</Link>
           </p>
         </div>
       </div>

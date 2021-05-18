@@ -10,6 +10,7 @@ const Header = () => {
     <Modal>
       <div className={classes.pic}>
         <img className={classes.image} src={Logo} alt="" />
+        <div className={classes.cover}>
         <h1 className={classes.text}>
           Runway<br />
           <span className={classes.textSmall}>
@@ -22,6 +23,7 @@ const Header = () => {
           Line: @runwaydrink <br />
           IG: runway_healthy_drink
         </p>
+        </div>
       </div>
     </Modal>
   );

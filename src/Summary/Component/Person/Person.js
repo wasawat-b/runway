@@ -19,13 +19,13 @@ const Person = () => {
     <Fragment>
       <h2>Total amount of Each Person</h2>
       <h3>
-        Runway : <span>{profitLoss} Baht</span>
+        Runway<span> : {profitLoss} Baht</span>
       </h3>
       <h3>
-        Pee : <span>{peeProfitLoss} Baht</span>
+        Pee<span> : {peeProfitLoss} Baht</span>
       </h3>
       <h3>
-        Sun : <span>{sunProfitLoss} Baht</span>
+        Sun<span> : {sunProfitLoss} Baht</span>
       </h3>
     </Fragment>
   );

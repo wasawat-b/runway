@@ -34,15 +34,65 @@ span {
   font-size: 14px;
 }
 
-p a {
+.link {
+  color: rgb(0, 119, 255);
   text-decoration: none;
-  color: rgb(47, 0, 255);
   font-weight: bold;
-  border-radius: 10px;
 }
 
-p a:hover {
+.link:hover {
+  text-decoration: underline;
   font-size: 22px;
   font-weight: bold;
-  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 0 5%;
+    width: 40%;
+  }
+  
+  .cover h1 {
+    font-size: 24px;
+  }
+  .cover h2 {
+    font-size: 20px;
+  }
+  
+  .cover p {
+      font-size: 16px;
+  }
+  
+  span {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cover {
+    border: 3px solid rgba(128, 128, 128, 0.671);
+  }
+  
+  .cover h1 {
+    font-size: 16px;
+  }
+  .cover h2 {
+    font-size: 14px;
+  }
+  
+  .cover p {
+      font-size: 12px;
+  }
+  
+  span {
+    font-size: 9px;
+  }
+  
+  .link {
+    font-size: 12px;
+  }
+  
+  .link:hover {
+    font-size: 15px;
+  }
 }

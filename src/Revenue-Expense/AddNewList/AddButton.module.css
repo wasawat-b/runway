@@ -19,3 +19,31 @@
   background-color: rgba(207, 250, 250, 0.7);
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .addButton {
+    font-size: 14px;
+    width: 90px;
+    height: 25px;
+  }
+  
+  .addButton:hover {
+    font-size: 16px;
+    width: 95px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .addButton {
+    font-size: 10px;
+    width: 80px;
+    height: 20px;
+  }
+  
+  .addButton:hover {
+    font-size: 12px;
+    width: 85px;
+    height: 23px;
+  }
+}

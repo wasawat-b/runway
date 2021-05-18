@@ -59,7 +59,7 @@ const ProductDetail = () => {
             </div>
           </div>
           <p>
-            <Link to="/products">ย้อนกลับ</Link>
+            <Link className={classes.link} to="/products">ย้อนกลับ</Link>
           </p>
         </Fragment>
       )}
@@ -129,7 +129,7 @@ const ProductDetail = () => {
           </div>
         </div>
         <p>
-          <Link to="/products">ย้อนกลับ</Link>
+          <Link className={classes.link} to="/products">ย้อนกลับ</Link>
         </p>
       </Fragment>
       )}

@@ -35,14 +35,14 @@ const ListItem = (props) => {
       </td>
       <td>
         <img
-          className={classes.editPencil}
+          className={classes.icon}
           src={editPencil}
           alt="Edit Pencil"
           onClick={editHandler}
         />
 
         <img
-          className={classes.deleteIcon}
+          className={classes.icon}
           src={deleteIcon}
           alt="Delete Icon"
           onClick={deleteHandler}

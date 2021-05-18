@@ -37,7 +37,7 @@ const Form = (props) => {
         max="12"
         value={month}
         onChange={searchMonth}
-        placeholder="type month"
+        placeholder="month..."
         required
       />
       <input
@@ -45,12 +45,12 @@ const Form = (props) => {
         min="2021"
         value={year}
         onChange={searchYear}
-        placeholder="type year"
+        placeholder="year..."
         required
       />
       <button type="submit">search</button>
       </form>
-      <h4>{date}</h4>
+      <h3>{date}</h3>
     </div>
   );
 };

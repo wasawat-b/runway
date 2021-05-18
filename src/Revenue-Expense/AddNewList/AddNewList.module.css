@@ -13,10 +13,8 @@
   text-shadow: 2px 2px rgb(41, 41, 41, 0.3);
 }
 
-/*Covering div of each topic !!!!!!!!!!!!!!!!!!!!!!*/
 .formControl {
   padding: 1px;
-  font-size: large;
 }
 .formControl label {
   font-size: 20px;
@@ -70,6 +68,17 @@
   display: none;
 }
 
+.check {
+  margin-top: 10px;
+  width: 23px;
+  height: 17px;
+}
+
+.check:hover {
+  width: 26px;
+  height: 20px;
+}
+
 span {
   font-size: medium;
 }
@@ -82,7 +91,6 @@ span {
   margin: 0px 0 8px 15px;
 }
 
-/*!!!!!!!!!!!!*/
 .buttonAdd {
   font-size: 14px;
   color: white;
@@ -105,17 +113,6 @@ span {
   margin-right: 5px;
 }
 
-.check {
-  margin-top: 10px;
-  width: 23px;
-  height: 17px;
-}
-
-.check:hover {
-  width: 26px;
-  height: 20px;
-}
-
 .buttonAdd:hover {
   background-color: rgb(50, 150, 231);
   cursor: pointer;
@@ -131,9 +128,12 @@ span {
   cursor: pointer;
 }
 
-@media (max-width: 650px) {
-  .inputOther {
-    margin-left: 0;
+@media (max-width: 900px) {
+  .sellList {
+    display: none;
+  }
+  .hide {
+    display: block;
   }
 }
 
@@ -149,11 +149,69 @@ span {
   }
 }
 
-@media (max-width: 900px) {
-  .sellList {
-    display: none;
+@media (max-width: 480px) {
+  .form {
+    padding: 2px;
+    border: 2px solid rgb(15, 15, 15, 0.75);
   }
-  .hide {
-    display: block;
+  
+  .addForm {
+    font-size: 20px;
+    margin: 0px 0 10px 0;
+  }
+  
+  .formControl label {
+    font-size: 16px;
+  }
+  .formControl select {
+    font-size: small;
+    height: 20px;
+  }
+  .formControl input {
+    font-size: small;
+    width: 80%;
+    height: 15px;
+  }
+  
+  .inputOther {
+    font-size: small;
+    width: 80%;
+    margin-left: 0px;
+  }
+  
+  .inputBlock {
+    margin: 0 15px;
+  }
+    
+  .check {
+    margin-top: 5px;
+    width: 20px;
+    height: 15px;
+  }
+  
+  .check:hover {
+    width: 22px;
+    height: 17px;
+  }
+  
+  span {
+    font-size: 12px;
+  }
+  
+  .error {
+    font-size: 12px;
+    margin: 0px 0 5px 0px;
+  }
+  
+  .buttonAdd {
+    font-size: 12px;
+    width: 40px;  
+    margin-top: 10px;
+  }
+  
+  .buttonClose {
+    font-size: 12px;
+    width: 40px;
+    margin-top: 10px;
   }
 }
