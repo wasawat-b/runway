@@ -1,0 +1,48 @@
+.card {
+  padding: 0 10%;
+  margin-bottom: 1%;
+  width: 30%;
+  float: left;
+}
+
+.cover {
+  border: 5px solid rgba(128, 128, 128, 0.671);
+  text-align: center;
+}
+
+.cover h1 {
+  margin: 0;
+  font-size: 28px;
+}
+.cover h2 {
+  margin: 0;
+  font-size: 25px;
+  color: red;
+}
+
+.cover p {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.all {
+  width: 100%;
+  height: auto;
+}
+
+span {
+  font-size: 14px;
+}
+
+p a {
+  text-decoration: none;
+  color: rgb(47, 0, 255);
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+p a:hover {
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: underline;
+}

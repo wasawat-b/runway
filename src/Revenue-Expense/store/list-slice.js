@@ -4,7 +4,6 @@ const listSlice = createSlice({
   name: "dataStorage",
   initialState: {
     lists: [],
-    totalAmount: 0,
     changed: false,
     editOrder: "",
   },
@@ -24,12 +23,7 @@ const listSlice = createSlice({
         person: newList.person,
         detail: newList.detail,
         amount: newList.amount,
-        stawBig: newList.stawBig,
-        stawSmall: newList.stawSmall,
-        banaBig: newList.banaBig,
-        banaSmall: newList.banaSmall,
-        chocBig: newList.chocBig,
-        chocSmall: newList.chocSmall,
+        sell: newList.sell,
       });
     },
 

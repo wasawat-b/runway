@@ -24,12 +24,12 @@ const ListItem = (props) => {
 
   return (
     <tr className={classes.row}>
-      <td>{category}</td>
+      <td className={classes.category}>{category}</td>
       <td>{date}</td>
       <td>{order}</td>
       <td>{person}</td>
       <td>{detail}</td>
-      <td>{amount}</td>
+      <td>{parseFloat(amount).toFixed(2)}</td>
       <td>
         <input className={classes.trick} type="checkbox" />
       </td>

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import useValid from "../hook/use-valid";
 
@@ -11,7 +11,7 @@ import Check from "../Image/check.jpg";
 import Edit from "../Image/edit_pencil.jpg";
 import Delete from "../Image/deleteIcon.jpg";
 
-import classes from "./EditForm.module.css";
+import classes from "../AddNewList/AddNewList.module.css";
 
 // Pop-out when click the Edit button at the end of the List.
 const EditForm = () => {
@@ -72,16 +72,6 @@ const EditForm = () => {
   } = useValid(amount);
 
   const dispatch = useDispatch();
-
-  // เช็คว่า order เป็น order ใหม่นะ
-  const allLists = useSelector((state) => state.lists.lists);
-  let orderIsExisted = false;
-  const existingOrder = allLists.find(
-    (state) => state.order === orderRef.current.value
-  );
-  if (existingOrder) {
-    orderIsExisted = true;
-  }
 
   // Changing Category !!!!
   const categoryChange = (event) => {
@@ -165,7 +155,7 @@ const EditForm = () => {
 
   // Changing Amount
   const amountChange = (event) => {
-    setAmount(event.target.value);
+    setAmount(parseFloat(event.target.value));
     return;
   };
 
@@ -179,7 +169,6 @@ const EditForm = () => {
     categoryIsValid &&
     dateIsValid &&
     orderIsValid &&
-    !orderIsExisted &&
     personIsValid &&
     amountIsValid
   ) {
@@ -190,11 +179,20 @@ const EditForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const theDate = new Intl.DateTimeFormat("en-GB", {
+    const theDate = new Intl.DateTimeFormat("en-US", {
       year: "numeric",
-      month: "2-digit",
+      month: "short",
       day: "2-digit",
     }).format(new Date(date));
+
+    const gatheringSell = {
+      stawBig: stawBig,
+      stawSmall: stawSmall,
+      banaBig: banaBig,
+      banaSmall: banaSmall,
+      chocBig: chocBig,
+      chocSmall: chocSmall,
+    };
 
     //gather all data
     const gatheringList = {
@@ -204,12 +202,7 @@ const EditForm = () => {
       person: person,
       detail: detailRef.current.value,
       amount: amount,
-      stawBig: stawBig,
-      stawSmall: stawSmall,
-      banaBig: banaBig,
-      banaSmall: banaSmall,
-      chocBig: chocBig,
-      chocSmall: chocSmall,
+      sell: gatheringSell,
     };
 
     //send data
@@ -223,16 +216,26 @@ const EditForm = () => {
     resetAmount();
   };
 
-  const categoryClasses = categoryError ? "formControl invalid" : "formControl";
-  const dateClasses = dateError ? "formControl invalid" : "formControl";
-  const orderClasses = orderError ? "formControl invalid" : "formControl";
-  const personClasses = personError ? "formControl invalid" : "formControl";
-  const amountClasses = amountError ? "formControl invalid" : "formControl";
+  const categoryClasses = categoryError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+  const dateClasses = dateError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+  const orderClasses = orderError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+  const personClasses = personError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+  const amountClasses = amountError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
 
   return (
     <Modal onClose={showEditTable}>
       <form className={classes.form} onSubmit={submitHandler}>
-        <h1>Edit Form</h1>
+        <h1 className={classes.addForm}>Edit Form</h1>
         <div className={categoryClasses}>
           <label>Category: </label>
           <select
@@ -247,12 +250,10 @@ const EditForm = () => {
             <option value="งบซื้ออุปกรณ์สิ่งของ">งบซื้ออุปกรณ์สิ่งของ</option>
             <option value="โฆษณา">โฆษณา</option>
             <option value="ยอดขาย">ยอดขาย</option>
-            <option value="ยอดขายรวมส่ง">ยอดขายรวมส่ง</option>
             <option value="ซื้อคืนราคาทุน">ซื้อคืนราคาทุน</option>
             <option value="จ่ายส่วนแบ่ง">จ่ายส่วนแบ่ง</option>
             <option value="Other...">Other...</option>
           </select>
-          {categoryError && <p>Please enter a category!</p>}
 
           <div className={classes.inputBlock}>
             {categorySellShow === true || categorySummaryShow === true ? (
@@ -276,6 +277,7 @@ const EditForm = () => {
                     value={stawBig}
                     onChange={stawBigChange}
                   />
+                  <div className={classes.hide}></div>
                   <label className={classes.textSell}>สตรอขวดเล็ก</label>
                   <input
                     className={classes.inputSell}
@@ -294,6 +296,7 @@ const EditForm = () => {
                     value={banaBig}
                     onChange={banaBigChange}
                   />
+                  <div className={classes.hide}></div>
                   <label className={classes.textSell}>กล้วยขวดเล็ก</label>
                   <input
                     className={classes.inputSell}
@@ -312,6 +315,7 @@ const EditForm = () => {
                     value={chocBig}
                     onChange={chocBigChange}
                   />
+                  <div className={classes.hide}></div>
                   <label className={classes.textSell}>ช๊อคขวดเล็ก</label>
                   <input
                     className={classes.inputSell}
@@ -356,9 +360,14 @@ const EditForm = () => {
             />
           ) : null}
         </div>
+        {categoryError && (
+          <p className={classes.error}>Please select a category!</p>
+        )}
 
         <div className={dateClasses}>
-          <label>Date (m/d/y): </label>
+          <label>
+            Date <span>(m/d/y)</span>:{" "}
+          </label>
           <input
             type="date"
             value={date}
@@ -367,7 +376,7 @@ const EditForm = () => {
             onFocus={dateFocus}
           />
         </div>
-        {dateError && <p>Please select a date!</p>}
+        {dateError && <p className={classes.error}>Please select a date!</p>}
 
         <div className={orderClasses}>
           <label>Order: </label>
@@ -378,8 +387,7 @@ const EditForm = () => {
             onFocus={orderFocus}
           />
         </div>
-        {orderError && <p>Please enter a order!</p>}
-        {orderIsExisted && <p>The order number is used!</p>}
+        {orderError && <p className={classes.error}>Please enter a order!</p>}
 
         <div className={personClasses}>
           <label>Person: </label>
@@ -408,7 +416,7 @@ const EditForm = () => {
             />
           ) : null}
         </div>
-        {personError && <p>Please enter a person!</p>}
+        {personError && <p className={classes.error}>Please enter a person!</p>}
 
         <div className={classes.formControl}>
           <label>Detail: </label>
@@ -425,7 +433,7 @@ const EditForm = () => {
             onFocus={amountFocus}
           />
         </div>
-        {amountError && <p>Please enter a amount!</p>}
+        {amountError && <p className={classes.error}>Please enter a amount!</p>}
 
         <button
           className={classes.buttonAdd}

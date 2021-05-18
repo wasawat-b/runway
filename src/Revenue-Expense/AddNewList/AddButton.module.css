@@ -1,20 +1,21 @@
-.addButton{
-    position: fixed;
-    right: 4rem;
-    bottom: 20px;
-    width: 200px;
-    height: 50px;
-    padding: 0px;
-    font-size: 20px;
-    text-align: center;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin: 0;
-    z-index: 20;
-    background-color: rgb(201, 253, 148);
+.addButton {
+  text-align: center;
+  font-size: 16px;
+  width: 100px;
+  height: 30px;
+  padding: 0px;
+  border: 5px solid rgba(207, 250, 250, 0.8);
+  border-radius: 10px;
+  margin-top: 10px;
+  background-color: rgba(207, 250, 250, 0.6);
 }
 
-.addButton:hover{
-    background-color: yellow;
-    cursor: pointer;
+.addButton:hover {
+  font-size: 18px;
+  width: 110px;
+  height: 40px;
+  border: 5px solid rgba(207, 250, 250, 0.9);
+  margin-top: 10px;
+  background-color: rgba(207, 250, 250, 0.7);
+  cursor: pointer;
 }

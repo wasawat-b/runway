@@ -1,7 +1,7 @@
 import React from "react";
 
-import Logo from "./image/LOGO.jpg";
-import Modal from "./UI/Modal";
+import Logo from "../image/LOGO completed.png";
+import Modal from "../UI/Modal";
 
 import classes from "./Header.module.css";
 

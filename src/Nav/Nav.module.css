@@ -1,0 +1,44 @@
+ul {
+  height: 80px;
+  margin: 0 0 10px 0;
+  padding-left: 0px;
+  display: flex;
+  flex-wrap: nowrap;
+  list-style-type: none;
+  padding-left: 20px;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255, 236, 212, 0.3),
+    rgb(255, 236, 212, 0.1),
+    rgb(255, 255, 255),
+    rgb(255, 236, 212, 0.2)
+  );
+}
+
+ul a {
+  text-decoration: none;
+  color: rgb(70, 69, 69);
+}
+
+
+.list {
+  font-size: 20px;
+  text-align: center;
+  padding: 30px 10px;
+}
+
+ul a:hover {
+    color: black;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.login a:active,
+.list a.active {
+  color: #582525;
+  font-weight: bold;
+  padding-bottom: 0.25rem;
+  border-bottom: 4px solid #582525;
+}

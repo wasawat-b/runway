@@ -11,7 +11,7 @@ const AddButton = () => {
 
   return (
     <button className={classes.addButton} onClick={showAddTable}>
-      Add new table
+      + Add Table
     </button>
   );
 };

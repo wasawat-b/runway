@@ -20,12 +20,12 @@ const AddNewList = () => {
   const [person, setPerson] = useState("");
   const [amount, setAmount] = useState("");
 
-  const [stawBig, setStawBig] = useState("");
-  const [stawSmall, setStawSmall] = useState("");
-  const [banaBig, setBanaBig] = useState("");
-  const [banaSmall, setBanaSmall] = useState("");
-  const [chocBig, setChocBig] = useState("");
-  const [chocSmall, setChocSmall] = useState("");
+  const [stawBig, setStawBig] = useState(0);
+  const [stawSmall, setStawSmall] = useState(0);
+  const [banaBig, setBanaBig] = useState(0);
+  const [banaSmall, setBanaSmall] = useState(0);
+  const [chocBig, setChocBig] = useState(0);
+  const [chocSmall, setChocSmall] = useState(0);
 
   const [categorySellShow, setCategorySellShow] = useState(false);
   const [categorySummaryShow, setCategorySummaryShow] = useState(false);
@@ -166,7 +166,7 @@ const AddNewList = () => {
 
   // Changing Amount
   const amountChange = (event) => {
-    setAmount(event.target.value);
+    setAmount(parseFloat(event.target.value));
     return;
   };
 
@@ -191,11 +191,20 @@ const AddNewList = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const theDate = new Intl.DateTimeFormat("en-GB", {
+    const theDate = new Intl.DateTimeFormat("en-US", {
       year: "numeric",
-      month: "2-digit",
+      month: "short",
       day: "2-digit",
     }).format(new Date(date));
+
+    const gatheringSell = {
+      stawBig: stawBig,
+      stawSmall: stawSmall,
+      banaBig: banaBig,
+      banaSmall: banaSmall,
+      chocBig: chocBig,
+      chocSmall: chocSmall,
+    };
 
     //gather all data
     const gatheringList = {
@@ -205,12 +214,7 @@ const AddNewList = () => {
       person: person,
       detail: detailRef.current.value,
       amount: amount,
-      stawBig: stawBig,
-      stawSmall: stawSmall,
-      banaBig: banaBig,
-      banaSmall: banaSmall,
-      chocBig: chocBig,
-      chocSmall: chocSmall,
+      sell: gatheringSell,
     };
 
     //send data
@@ -224,20 +228,29 @@ const AddNewList = () => {
     resetAmount();
   };
 
-  const categoryClasses = categoryError ? "formControl invalid" : "formControl";
-  const dateClasses = dateError ? "formControl invalid" : "formControl";
-  const orderClasses = orderError ? "formControl invalid" : "formControl";
-  const personClasses = personError ? "formControl invalid" : "formControl";
-  const amountClasses = amountError ? "formControl invalid" : "formControl";
+  const categoryClasses = categoryError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+  const dateClasses = dateError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+  const orderClasses = orderError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+  const personClasses = personError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+  const amountClasses = amountError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
 
   return (
     <Modal onClose={showAddTable}>
       <form className={classes.form} onSubmit={submitHandler}>
         <h1 className={classes.addForm}>Add Form</h1>
         <div className={categoryClasses}>
-          <label className={classes.head}>Category: </label>
+          <label>Category: </label>
           <select
-            className={classes.select}
             value={category}
             onChange={categoryChange}
             onBlur={categoryBlur}
@@ -249,7 +262,6 @@ const AddNewList = () => {
             <option value="งบซื้ออุปกรณ์สิ่งของ">งบซื้ออุปกรณ์สิ่งของ</option>
             <option value="โฆษณา">โฆษณา</option>
             <option value="ยอดขาย">ยอดขาย</option>
-            <option value="ยอดขายรวมส่ง">ยอดขายรวมส่ง</option>
             <option value="ซื้อคืนราคาทุน">ซื้อคืนราคาทุน</option>
             <option value="จ่ายส่วนแบ่ง">จ่ายส่วนแบ่ง</option>
             <option value="Other...">Other...</option>
@@ -268,7 +280,7 @@ const AddNewList = () => {
             ) : null}
             {categorySellShow === true ? (
               <div>
-                <div>
+                <div >
                   <label className={classes.textSell}>สตรอขวดใหญ่</label>
                   <input
                     className={classes.inputSell}
@@ -277,6 +289,7 @@ const AddNewList = () => {
                     value={stawBig}
                     onChange={stawBigChange}
                   />
+                  <div className={classes.hide}></div>
                   <label className={classes.textSell}>สตรอขวดเล็ก</label>
                   <input
                     className={classes.inputSell}
@@ -295,6 +308,7 @@ const AddNewList = () => {
                     value={banaBig}
                     onChange={banaBigChange}
                   />
+                  <div className={classes.hide}></div>
                   <label className={classes.textSell}>กล้วยขวดเล็ก</label>
                   <input
                     className={classes.inputSell}
@@ -313,6 +327,7 @@ const AddNewList = () => {
                     value={chocBig}
                     onChange={chocBigChange}
                   />
+                  <div className={classes.hide}></div>
                   <label className={classes.textSell}>ช๊อคขวดเล็ก</label>
                   <input
                     className={classes.inputSell}
@@ -356,45 +371,42 @@ const AddNewList = () => {
               placeholder="Other..."
             />
           ) : null}
+          {categoryError && (
+            <p className={classes.error}>Please select a category!</p>
+          )}
         </div>
-        {categoryError && (
-          <p className={classes.error}>Please select a category!</p>
-        )}
 
         <div className={dateClasses}>
-          <label className={classes.head}>
+          <label>
             Date <span>(m/d/y)</span>:{" "}
           </label>
           <input
-            className={classes.input}
             type="date"
             value={date}
             onChange={dateChange}
             onBlur={dateBlur}
             onFocus={dateFocus}
           />
+          {dateError && <p className={classes.error}>Please select a date!</p>}
         </div>
-        {dateError && <p className={classes.error}>Please select a date!</p>}
 
         <div className={orderClasses}>
-          <label className={classes.head}>Order: </label>
+          <label>Order: </label>
           <input
-            className={classes.input}
             type="number"
             ref={orderRef}
             onBlur={orderBlur}
             onFocus={orderFocus}
           />
+          {orderError && <p className={classes.error}>Please enter a order!</p>}
+          {orderIsExisted && (
+            <p className={classes.error}>The order number is used!</p>
+          )}
         </div>
-        {orderError && <p className={classes.error}>Please enter a order!</p>}
-        {orderIsExisted && (
-          <p className={classes.error}>The order number is used!</p>
-        )}
 
         <div className={personClasses}>
-          <label className={classes.head}>Person: </label>
+          <label>Person: </label>
           <select
-            className={classes.select}
             value={person}
             onChange={personChange}
             onBlur={personBlur}
@@ -409,7 +421,7 @@ const AddNewList = () => {
           {personOtherShow === true ? (
             // input สำหรับ Other...
             <input
-              className={classes.input}
+              className={classes.inputOther}
               type="text"
               value={person}
               onChange={personChangeForOther}
@@ -418,26 +430,29 @@ const AddNewList = () => {
               placeholder="Other..."
             />
           ) : null}
+          {personError && (
+            <p className={classes.error}>Please enter a person!</p>
+          )}
         </div>
-        {personError && <p className={classes.error}>Please enter a person!</p>}
 
         <div className={classes.formControl}>
-          <label className={classes.head}>Detail: </label>
-          <input className={classes.input} type="text" ref={detailRef} />
+          <label>Detail: </label>
+          <input type="text" ref={detailRef} />
         </div>
 
         <div className={amountClasses}>
-          <label className={classes.head}>Amount: </label>
+          <label>Amount: </label>
           <input
-            className={classes.input}
             type="number"
             value={amount}
             onChange={amountChange}
             onBlur={amountBlur}
             onFocus={amountFocus}
           />
+          {amountError && (
+            <p className={classes.error}>Please enter a amount!</p>
+          )}
         </div>
-        {amountError && <p className={classes.error}>Please enter a amount!</p>}
 
         <button
           className={classes.buttonAdd}

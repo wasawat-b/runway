@@ -1,0 +1,89 @@
+.cardStaw {
+  width: 80%;
+  margin: 10px 10% 5% 10%;
+  background-image: url('../img/stawBack.png');
+  background-position: left top;
+  background-size: 120%;
+}
+
+.cardBana {
+  width: 80%;
+  margin: 10px 10% 5% 10%;
+  background-image: url("../img/banaBack.jpg.png");
+  background-position: left top;
+  background-size: 120%;
+}
+
+.cardChoc {
+  width: 80%;
+  margin: 10px 10% 5% 10%;
+  background-image: url("../img/chocBack.png");
+  background-position: left top;
+  background-size: 120%;
+}
+
+.cover {
+  display: flex;
+}
+
+.head {
+  font-size: xx-large;
+  margin-bottom: 10px;
+}
+
+.staw {
+  font-size: xx-large;
+  font-weight: bold;
+  color: rgb(240, 61, 136);
+  text-decoration: underline;
+}
+.bana {
+  font-size: xx-large;
+  font-weight: bold;
+  color: rgb(194, 147, 47);
+  text-decoration: underline;
+}
+.choc {
+  font-size: xx-large;
+  font-weight: bold;
+  color: rgb(131, 69, 69);
+  text-decoration: underline;
+}
+
+.pic {
+  width: 20%;
+  height: auto;
+  margin-right: 5%;
+  display: inline-block;
+}
+
+.picChoc {
+  width: 25%;
+  height: auto;
+  margin-right: 5%;
+  display: inline-block;
+}
+
+.cover p {
+  display: inline-block;
+  width: 75%;
+  font-size: larger;
+}
+
+.cover strong {
+  font-size: 24px;
+  text-decoration: underline;
+}
+
+p a {
+  font-size: 20px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  margin-left: 5%;
+}
+
+p a:hover {
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: underline;
+}

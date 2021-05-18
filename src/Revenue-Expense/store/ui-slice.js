@@ -9,6 +9,7 @@ const uiSlice = createSlice({
     showCateSum: false,
     showCateOther: false,
     showPersonOther: false,
+    showSummary: false,
     response: null,
   },
   reducers: {
@@ -34,6 +35,10 @@ const uiSlice = createSlice({
 
     showingPersonOther(state, action) {
       state.showPersonOther = action.payload;
+    },
+
+    showingSummary(state) {
+      state.showSummary = !state.showSummary;
     },
 
     showResponse(state, action) {

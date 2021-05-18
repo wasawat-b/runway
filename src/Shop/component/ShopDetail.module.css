@@ -1,0 +1,46 @@
+.card{
+  width: 80%;
+  margin: 10px 10% 5% 10%;
+}
+
+.head {
+  font-size: xx-large;
+  font-weight: bolder;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+.cover {
+  display: flex;
+}
+
+.pic {
+  width: 20%;
+  height: auto;
+  margin-right: 5%;
+  display: inline-block;
+}
+
+.cover p {
+  display: block;
+  width: 75%;
+  font-size: larger;
+}
+
+.cover strong {
+  font-size: 24px;
+  text-decoration: underline;
+}
+
+p a {
+  font-size: 20px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  margin-left: 5%;
+}
+
+p a:hover {
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: underline;
+}
