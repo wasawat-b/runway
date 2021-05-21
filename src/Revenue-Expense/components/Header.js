@@ -3,15 +3,15 @@ import classes from './Header.module.css';
 
 const Header = () => {
     return(
-        <tr>
-            <th className={classes.cate}>Categories</th>
-            <th>Date</th>
-            <th>Order</th>
-            <th>Person</th>
-            <th className={classes.detail}>Detail</th>
-            <th>Amount</th>
-            <th>Check</th>
-            <th className={classes.edit}>Edit</th>
+        <tr className="row">
+            <th className={`col-2 ${classes.cate}`}>Categories</th>
+            <th className="col-2">Date</th>
+            <th className="col-1">Order</th>
+            <th className="col-1">Person</th>
+            <th className="col-3">Detail</th>
+            <th className="col-1">Amount</th>
+            <th className="col-1">Check</th>
+            <th className={`col-1 ${classes.edit}`}>Edit</th>
         </tr>
     )
 }

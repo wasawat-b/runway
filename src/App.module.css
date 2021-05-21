@@ -2,14 +2,14 @@
     margin: 0 4rem;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .body {
-        margin: 0 0.5em;
+        margin: 0 2em;
     }
 }
 
-@media (max-width: 223px) {
+@media (max-width: 480px) {
     .body {
-        margin: 0;
+        margin: 0 0.5em;
     }
 }

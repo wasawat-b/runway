@@ -8,15 +8,19 @@ import { listActions } from "../store/list-slice";
 
 import Modal from "../UI/Modal";
 import Check from "../Image/check.jpg";
-import Edit from "../Image/edit_pencil.jpg";
-import Delete from "../Image/deleteIcon.jpg";
+import Edit from "../Image/edit_pencil.png";
+import Delete from "../Image/deleteIcon.png";
 
 import classes from "./AddNewList.module.css";
 
 // Pop-out when click the Edit button at the end of the List.
 const AddNewList = () => {
+  const dispatch = useDispatch();
+  const allLists = useSelector((state) => state.lists.lists);
+
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
+  const [order, setOrder] = useState(allLists.length + 1);
   const [person, setPerson] = useState("");
   const [amount, setAmount] = useState("");
 
@@ -32,7 +36,6 @@ const AddNewList = () => {
   const [categoryOtherShow, setCategoryOtherShow] = useState(false);
   const [personOtherShow, setPersonOtherShow] = useState(false);
 
-  const orderRef = useRef("");
   const detailRef = useRef("");
 
   const {
@@ -55,7 +58,7 @@ const AddNewList = () => {
     inputBlur: orderBlur,
     inputFocus: orderFocus,
     reset: resetOrder,
-  } = useValid(orderRef.current.value);
+  } = useValid(order);
   const {
     isValid: personIsValid,
     errorOccur: personError,
@@ -71,13 +74,10 @@ const AddNewList = () => {
     reset: resetAmount,
   } = useValid(amount);
 
-  const dispatch = useDispatch();
-
   // เช็คว่า order เป็น order ใหม่นะ
-  const allLists = useSelector((state) => state.lists.lists);
   let orderIsExisted = false;
   const existingOrder = allLists.find(
-    (state) => state.order === orderRef.current.value
+    (state) => state.order === order
   );
   if (existingOrder) {
     orderIsExisted = true;
@@ -100,6 +100,7 @@ const AddNewList = () => {
       return;
     }
     setCategory(event.target.value);
+    setCategoryOtherShow(false);
     setCategorySellShow(false);
   };
 
@@ -164,6 +165,12 @@ const AddNewList = () => {
     setPerson(event.target.value);
   };
 
+  // Changing Order
+  const orderChange = (event) => {
+    setOrder(event.target.value);
+    return;
+  };
+
   // Changing Amount
   const amountChange = (event) => {
     setAmount(parseFloat(event.target.value));
@@ -210,7 +217,7 @@ const AddNewList = () => {
     const gatheringList = {
       category: category,
       date: theDate,
-      order: orderRef.current.value,
+      order: order,
       person: person,
       detail: detailRef.current.value,
       amount: amount,
@@ -381,6 +388,7 @@ const AddNewList = () => {
             Date <span>(m/d/y)</span>:{" "}
           </label>
           <input
+            className={classes.dateInputClasses}
             type="date"
             value={date}
             onChange={dateChange}
@@ -394,7 +402,8 @@ const AddNewList = () => {
           <label>Order: </label>
           <input
             type="number"
-            ref={orderRef}
+            value={order}
+            onChange={orderChange}
             onBlur={orderBlur}
             onFocus={orderFocus}
           />

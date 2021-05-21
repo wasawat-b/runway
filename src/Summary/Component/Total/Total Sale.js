@@ -75,14 +75,14 @@ const TotalSale = () => {
   return (
     <Fragment>
       <h2>Total Sold Bottle</h2>
-      <p>Big bottles : {totalBig}</p>
-      <p>Small bottles : {totalSmall}</p>
+      <h3>Big bottles : {totalBig}</h3>
+      <h3>Small bottles : {totalSmall}</h3>
       <Form onSendDate={receiveDateHandler} />
       {showDetail && (
         <div>
-          <p>sold bottle : {totalSearch}</p>
-          <p>Profit / Loss : {profitLoss}</p>
-          <p>Cost : {cost}</p>
+          <h3>sold bottle : {totalSearch}</h3>
+          <h3>Profit / Loss : {profitLoss}</h3>
+          <h3>Cost : {cost}</h3>
         </div>
       )}
     </Fragment>

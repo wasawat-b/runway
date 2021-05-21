@@ -26,9 +26,14 @@
 }
 .formControl input {
   font-size: medium;
-  height: 17px;
+  height: 21px;
   padding: 0;
 }
+
+.dateInputClasses {
+  width: 35%;
+}
+
 .invalid input,
 .invalid select {
   color: red;
@@ -165,6 +170,7 @@ span {
   }
   .formControl select {
     font-size: small;
+    width: 80%;
     height: 20px;
   }
   .formControl input {

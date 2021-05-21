@@ -1,18 +1,7 @@
 .table {
     border-collapse: collapse;
     text-align: center;
-    width: 100%;
-    font-size: 1.5vw;
-}
-
-@media (max-width: 768px) {
-    .table {
-        font-size: 2vw;
-    }
-}
-
-@media (max-width: 480px) {
-    .table {
-        font-size: 3vw;
-    }
+    width: 98%;
+    display: flex;
+    justify-items: center;
 }

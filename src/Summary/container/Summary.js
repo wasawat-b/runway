@@ -6,20 +6,16 @@ import classes from "./Summary.module.css";
 const Summary = () => {
   return (
     <Fragment>
-      <div className={classes.card}>
-
-          <div className={classes.cardLeft}>
-            <div className={classes.cover}>
-              <TotalSale />
-            </div>
+      <div className={`container ${classes.card}`}>
+        <div className="row justify-content-around">
+          <div className={`col-12 col-md-5 ${classes.cover}`}>
+            <TotalSale />
           </div>
 
-          <div className={classes.cardRight}>
-            <div className={classes.cover}>
-              <Person />
-            </div>
+          <div className={`col-12 col-md-5 ${classes.cover}`}>
+            <Person />
           </div>
-
+        </div>
       </div>
     </Fragment>
   );

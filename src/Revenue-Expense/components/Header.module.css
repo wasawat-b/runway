@@ -1,8 +1,8 @@
 th{
-    text-align: center;
-    width: 100px;
-    padding: 3px;
-    height: 4vh;
+    font-size: 90%;
+    display: flex;
+    justify-content: center;
+    padding: 5px 1%;
     background-color: rgb(53, 53, 53);
     color: rgb(255, 255, 255);
 }
@@ -15,8 +15,14 @@ th{
     border-radius: 0 10px 0 0;
 }
 
-.detail{
-    width: 350px;
-    max-width: 400px;
-    overflow-x:scroll;
+@media (max-width: 768px) {
+    th {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 480px) {
+    th {
+        font-size: 40%;
+    }
 }

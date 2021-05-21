@@ -13,14 +13,14 @@ const ShopDetail = () => {
   const params = useParams();
 
   return (
-    <div>
+    <div className="my-4">
       {params.productId === "นครราชสีมา" && (
         <Fragment>
-          <div className={classes.card}>
+          <div className="container mb-5 col-8">
             <p className={classes.head}>Passion Gym</p>
-            <div className={classes.cover}>
-              <img className={classes.pic} src={Passion} alt="" />
-              <p>
+            <div className="row">
+              <img className={`col-sm-3 ${classes.pic}`} src={Passion} alt="" />
+              <p className="col-sm-9">
                 <strong>Location</strong>  : ตำบลในเมือง อำเภอเมืองนครราชสีมา นครราชสีมา 30000<br />
                 <br />
                 <strong>Call</strong> : 095 251 5065
@@ -32,11 +32,11 @@ const ShopDetail = () => {
               </p>
             </div>
           </div>
-          <div className={classes.card}>
+          <div className="container mb-5 col-8">
             <p className={classes.head}>Overload Gym</p>
-            <div className={classes.cover}>
-              <img className={classes.pic} src={Overload} alt="" />
-              <p>
+            <div className="row">
+              <img className={`col-sm-3 ${classes.pic}`} src={Overload} alt="" />
+              <p className="col-sm-9">
                 <strong>Location</strong>  : 514 ถนน มิตรภาพ ตำบลในเมือง อำเภอเมืองนครราชสีมา นครราชสีมา 30000<br />
                 <br />
                 <strong>Call</strong> : 088 969 3476
@@ -48,18 +48,15 @@ const ShopDetail = () => {
               </p>
             </div>
           </div>
-          <p>
-            <Link to="/shops">ย้อนกลับ</Link>
-          </p>
         </Fragment>
       )}
       {params.productId === "ฉะเชิงเทรา" && (
         <Fragment>
-          <div className={classes.card}>
+          <div className="container mb-5 col-8">
             <p className={classes.head}>Fitness69 Gym</p>
-            <div className={classes.cover}>
-              <img className={classes.pic} src={Fitness69} alt="" />
-              <p>
+            <div className="row">
+              <img className={`col-sm-3 ${classes.pic}`} src={Fitness69} alt="" />
+              <p className="col-sm-9">
                 <strong>Location</strong>  : 87, ตำบลท่าสะอ้าน อำเภอบางปะกง ฉะเชิงเทรา 24130<br />
                 <br />
                 <strong>Call</strong> : 084 638 8852
@@ -71,11 +68,11 @@ const ShopDetail = () => {
               </p>
             </div>
           </div>
-          <div className={classes.card}>
+          <div className="container mb-5 col-8">
             <p className={classes.head}>FitnessLife Gym</p>
-            <div className={classes.cover}>
-              <img className={classes.pic} src={FitnessLife} alt="" />
-              <p>
+            <div className="row">
+              <img className={`col-sm-3 ${classes.pic}`} src={FitnessLife} alt="" />
+              <p className="col-sm-9">
                 <strong>Location</strong>  : ซอย หมู่บ้านดอนทองธานี ตำบล บางตีนเป็ด อำเภอเมืองฉะเชิงเทรา ฉะเชิงเทรา 24000<br />
                 <br />
                 <strong>Call</strong> : 097 079 2168
@@ -87,11 +84,11 @@ const ShopDetail = () => {
               </p>
             </div>
           </div>
-          <div className={classes.card}>
+          <div className="container mb-5 col-8">
             <p className={classes.head}>Human Strong Gym</p>
-            <div className={classes.cover}>
-              <img className={classes.pic} src={Human} alt="" />
-              <p>
+            <div className="row">
+              <img className={`col-sm-3 ${classes.pic}`} src={Human} alt="" />
+              <p className="col-sm-9">
                 <strong>Location</strong>  : 99/10 ม.1 ต.บ้านเก่า อ.พานทอง ชลบุรี 20160<br />
                 <br />
                 <strong>Call</strong> : 097 923 2721
@@ -103,11 +100,11 @@ const ShopDetail = () => {
               </p>
             </div>
           </div>
-          <p>
-            <Link to="/shops">ย้อนกลับ</Link>
-          </p>
         </Fragment>
       )}
+      <p className="my-3 text-start">
+            <Link to="/shops">ย้อนกลับ</Link>
+          </p>
     </div>
   );
 };

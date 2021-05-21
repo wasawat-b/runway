@@ -4,7 +4,7 @@ import React from 'react';
 const Table = (props) => {
     return(
         <table className={classes.table}>
-            <tbody>
+            <tbody className="container-fluid">
                 {props.children}
             </tbody>
         </table>

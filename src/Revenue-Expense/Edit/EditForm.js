@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import useValid from "../hook/use-valid";
 
@@ -8,17 +8,27 @@ import { listActions } from "../store/list-slice";
 
 import Modal from "../UI/Modal";
 import Check from "../Image/check.jpg";
-import Edit from "../Image/edit_pencil.jpg";
-import Delete from "../Image/deleteIcon.jpg";
+import Edit from "../Image/edit_pencil.png";
+import Delete from "../Image/deleteIcon.png";
 
 import classes from "../AddNewList/AddNewList.module.css";
 
 // Pop-out when click the Edit button at the end of the List.
 const EditForm = () => {
-  const [category, setCategory] = useState("");
-  const [date, setDate] = useState("");
-  const [person, setPerson] = useState("");
-  const [amount, setAmount] = useState("");
+  const dispatch = useDispatch();
+  const allLists = useSelector((state) => state.lists.lists);
+  const editOrder = useSelector((state) => state.lists.editOrder);
+
+  const foundEditList = allLists.filter((state) => state.order === editOrder);
+
+  const getDate = new Date(foundEditList[0].date).toISOString().slice(0, 10);
+
+  const [category, setCategory] = useState(foundEditList[0].category);
+  const [date, setDate] = useState(getDate);
+  const [order, setOrder] = useState(foundEditList[0].order);
+  const [person, setPerson] = useState(foundEditList[0].person);
+  const [detail, setDetail] = useState(foundEditList[0].detail);
+  const [amount, setAmount] = useState(foundEditList[0].amount);
 
   const [stawBig, setStawBig] = useState("");
   const [stawSmall, setStawSmall] = useState("");
@@ -31,9 +41,6 @@ const EditForm = () => {
   const [categorySummaryShow, setCategorySummaryShow] = useState(false);
   const [categoryOtherShow, setCategoryOtherShow] = useState(false);
   const [personOtherShow, setPersonOtherShow] = useState(false);
-
-  const orderRef = useRef("");
-  const detailRef = useRef("");
 
   const {
     isValid: categoryIsValid,
@@ -55,7 +62,7 @@ const EditForm = () => {
     inputBlur: orderBlur,
     inputFocus: orderFocus,
     reset: resetOrder,
-  } = useValid(orderRef.current.value);
+  } = useValid(order);
   const {
     isValid: personIsValid,
     errorOccur: personError,
@@ -70,8 +77,6 @@ const EditForm = () => {
     inputFocus: amountFocus,
     reset: resetAmount,
   } = useValid(amount);
-
-  const dispatch = useDispatch();
 
   // Changing Category !!!!
   const categoryChange = (event) => {
@@ -89,6 +94,7 @@ const EditForm = () => {
       return;
     }
     setCategory(event.target.value);
+    setCategoryOtherShow(false);
     setCategorySellShow(false);
   };
 
@@ -153,6 +159,17 @@ const EditForm = () => {
     setPerson(event.target.value);
   };
 
+  // Changing Detail
+  const detailChange = (event) => {
+    setDetail(event.target.value);
+  };
+
+  // Changing Order
+  const orderChange = (event) => {
+    setOrder(event.target.value);
+    return;
+  };
+
   // Changing Amount
   const amountChange = (event) => {
     setAmount(parseFloat(event.target.value));
@@ -198,9 +215,9 @@ const EditForm = () => {
     const gatheringList = {
       category: category,
       date: theDate,
-      order: orderRef.current.value,
+      order: order,
       person: person,
-      detail: detailRef.current.value,
+      detail: detail,
       amount: amount,
       sell: gatheringSell,
     };
@@ -370,6 +387,7 @@ const EditForm = () => {
           </label>
           <input
             type="date"
+            className={classes.dateInputClasses}
             value={date}
             onChange={dateChange}
             onBlur={dateBlur}
@@ -382,7 +400,8 @@ const EditForm = () => {
           <label>Order: </label>
           <input
             type="number"
-            ref={orderRef}
+            value={order}
+            onChange={orderChange}
             onBlur={orderBlur}
             onFocus={orderFocus}
           />
@@ -420,7 +439,7 @@ const EditForm = () => {
 
         <div className={classes.formControl}>
           <label>Detail: </label>
-          <input type="text" ref={detailRef} />
+          <input type="text" value={detail} onChange={detailChange} />
         </div>
 
         <div className={amountClasses}>

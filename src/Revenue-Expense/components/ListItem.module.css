@@ -6,116 +6,109 @@ tr:nth-of-type(odd) {
   background: rgb(238, 238, 238);
 }
 
-.category {
-  border: 0.5px solid rgb(150, 147, 147);
-  text-align: center;
-  padding: 3px;
-  width: 150px;
-  height: 4vh;
-  font-size: 1.2vw;
-}
-
 td {
   border: 0.5px solid rgb(150, 147, 147);
   text-align: center;
-  padding: 3px;
-  height: 4vh;
-  font-size: 1.2vw;
+  font-size: 1.5vw;
+  display: flex;
+  align-items: center;
+  height: 7vh;
 }
 
+/*detail*/
+.detail {
+  display: inline-block;
+  overflow-x: scroll;
+  display: flex;
+  align-items: center;
+}
+.detail::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+.detail::-webkit-scrollbar
+{
+	width: 12px;
+  height: 7px;
+	background-color: #F5F5F5;
+}
+.detail::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
+/*trick block*/
 input.trick {
-  width: 15px;
-  height: 15px;
+  width: 50%;
+  height: 50%;
 }
-
 input.trick:hover {
-  width: 20px;
-  height: 20px;
+  width: 65%;
+  height: 65%;
 }
 
+/*edit block*/
 .icon {
-  padding-top: 5px;
-  margin: 0 5px;
   width: 20px;
-  height: 20px;
-}
-
-.icon:hover {
-  width: 30px;
   height: 30px;
 }
 
-::-webkit-scrollbar {
-  height: 1px;
+.icon:hover {
+  width: 22px;
+  height: 32px;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
 
 @media (max-width: 768px) {
-  .category {
-    font-size: 1.5vw;
-  }
-
   td {
-    font-size: 1.5vw;
-  }
-
-  input.trick:hover {
-    width: 17px;
-    height: 17px;
+    height: 5vh;
   }
 
   .icon {
-    width: 12px;
-    height: 12px;
+    width: 18px;
+    height: 25px;
+  }
+  .icon:hover {
+    width: 20px;
+    height: 27px;
   }
 
-  .icon:hover {
+  input.trick {
     width: 15px;
     height: 15px;
+  }
+  input.trick:hover {
+    width: 20px;
+    height: 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .category {
-    height: 2vh;
-    font-size: 2vw;
-  }
-
   td {
-    height: 2vh;
     font-size: 2vw;
-  }
-
-  input.trick {
-    width: 10px;
-    height: 10px;
-  }
-
-  input.trick:hover {
-    width: 12px;
-    height: 12px;
   }
 
   .icon {
-    padding: 0;
-    margin: 0 2px;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 14px;
+  }
+  .icon:hover {
+    width: 12px;
+    height: 16px;
   }
 
-  .icon:hover {
-    width: 10px;
-    height: 10px;
+
+  input.trick {
+    width: 20px;
+    height: 20px;
+  }
+  input.trick:hover {
+    width: 20px;
+    height: 20px;
   }
 }
+

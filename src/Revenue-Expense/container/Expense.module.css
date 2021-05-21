@@ -1,3 +1,18 @@
 .summary {
     margin-bottom: 10px;
+    display: inline;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .summary {
+        font-size: small;
+    }
+}
+
+@media (max-width: 480px) {
+    .summary {
+        font-size: 60%;
+    }
 }
